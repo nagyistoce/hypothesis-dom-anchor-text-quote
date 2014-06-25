@@ -4,6 +4,10 @@ class TextQuoteSelectorCreator
 
   name: "TextQuoteSelector from text range (either raw or magic)"
 
+  # Do some normalization to get a "canonical" form of a string.
+  # Used to even out some browser differences.
+  _normalizeString: (string) -> string.replace /\s{2,}/g, " "
+
   describe: (selection) ->
     return [] unless selection.type in ["magic text range", "raw text range"]
 
@@ -15,8 +19,6 @@ class TextQuoteSelectorCreator
       new Range.BrowserRange(selection.range).normalize()
     else
       selection.range
-
-    console.log selection.range
 
     rangeStart = selection.range.startContainer
     unless rangeStart?
@@ -46,7 +48,7 @@ class TextQuoteSelectorCreator
       # Get the quote directly from the range
 
       type: "TextQuoteSelector"
-      exact: @annotator.normalizeString selection.range.text().trim()
+      exact: @_normalizeString r.text().trim()
 
 module.exports =
   creator: TextQuoteSelectorCreator
