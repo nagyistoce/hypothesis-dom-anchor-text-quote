@@ -1,6 +1,6 @@
 Range = require("xpath-range").Range
 
-class TextQuoteSelectorCreator
+class SelectorCreator
 
   name: "TextQuoteSelector from text range (either raw or magic)"
 
@@ -22,10 +22,12 @@ class TextQuoteSelectorCreator
 
     rangeStart = selection.range.startContainer
     unless rangeStart?
-      throw new Error "Called getTextQuoteSelector(range) on a range with no valid start."
+      throw new Error "Trying to create a TextQuoteSelector from
+        a range with no valid start."
     rangeEnd = selection.range.endContainer
     unless rangeEnd?
-      throw new Error "Called getTextQuoteSelector(range) on a range with no valid end."
+      throw new Error "Trying to create a TextQuoteSelector from
+        a range with no valid end."
 
     state = selection.data?.dtmState
     # Do we have d-t-m catabilitities and state?
@@ -51,4 +53,4 @@ class TextQuoteSelectorCreator
       exact: @_normalizeString r.text().trim()
 
 module.exports =
-  creator: TextQuoteSelectorCreator
+  creator: SelectorCreator
