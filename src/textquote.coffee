@@ -2,34 +2,33 @@ Range = require("xpath-range").Range
 
 class SelectorCreator
 
+  configure: (@manager) ->
+
   name: "TextQuoteSelector from text range (either raw or magic)"
 
-  # Do some normalization to get a "canonical" form of a string.
-  # Used to even out some browser differences.
-  _normalizeString: (string) -> string.replace /\s{2,}/g, " "
+  createFrom: (segmentDescription) ->
+    unless segmentDescription.type in ["magic text range", "raw text range"]
+      return []
 
-  describe: (selection) ->
-    return [] unless selection.type in ["magic text range", "raw text range"]
-
-    unless selection.range?
+    unless segmentDescription.range?
       throw new Error "Tried to create a TextQuoteSelector from a null range!"
 
-    r = if selection.type is "raw text range"
+    r = if segmentDescription.type is "raw text range"
       # TODO: we should be able to do this without converting to magic range.
-      new Range.BrowserRange(selection.range).normalize()
+      new Range.BrowserRange(segmentDescription.range).normalize()
     else
-      selection.range
+      segmentDescription.range
 
-    rangeStart = selection.range.startContainer
+    rangeStart = segmentDescription.range.startContainer
     unless rangeStart?
       throw new Error "Trying to create a TextQuoteSelector from
         a range with no valid start."
-    rangeEnd = selection.range.endContainer
+    rangeEnd = segmentDescription.range.endContainer
     unless rangeEnd?
       throw new Error "Trying to create a TextQuoteSelector from
         a range with no valid end."
 
-    state = selection.data?.dtmState
+    state = segmentDescription.data?.dtmState
     # Do we have d-t-m catabilitities and state?
     if state?.getStartInfoForNode?
       # Calculate the quote and context using DTM
@@ -50,7 +49,7 @@ class SelectorCreator
       # Get the quote directly from the range
 
       type: "TextQuoteSelector"
-      exact: @_normalizeString r.text().trim()
+      exact: @manager._normalizeString r.text().trim()
 
 module.exports =
   creator: SelectorCreator
