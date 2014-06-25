@@ -6,7 +6,7 @@ class SelectorCreator
 
   name: "TextQuoteSelector from text range (either raw or magic)"
 
-  createFrom: (segmentDescription) ->
+  createSelectors: (segmentDescription) ->
     unless segmentDescription.type in ["magic text range", "raw text range"]
       return []
 
