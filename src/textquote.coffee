@@ -3,6 +3,13 @@ Range = require("xpath-range").Range
 class SelectorCreator
 
   configure: (@manager) ->
+    # Register function to get quote from this selector
+    @manager._getQuoteForSelectors = (selectors) =>
+      selector = @manager._findSelector selectors, "TextQuoteSelector"
+      if selector?
+        @manager._normalizeString selector.exact
+      else
+        null
 
   name: "TextQuoteSelector from text range (either raw or magic)"
 
