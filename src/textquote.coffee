@@ -1,6 +1,6 @@
 Range = require("xpath-range").Range
 
-class SelectorCreator
+class TextQuoteSelectorCreator
 
   configure: (@manager) ->
     # Register function to get quote from this selector
@@ -59,4 +59,4 @@ class SelectorCreator
       exact: @manager._normalizeString r.text().trim()
 
 module.exports =
-  creator: SelectorCreator
+  creator: TextQuoteSelectorCreator
