@@ -1,14 +1,14 @@
 {
   "name": "dom-anchor-textquote",
-  "version": "0.0.0-dev1",
+  "version": "0.0.0-dev2",
   "description": "A DOM Anchoring Framework plugin that implements TextQuoteSelector",
   "main": "lib/textquote.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/csillag/dom-anchor-textquote"
+    "url": "https://github.com/hypothesis/dom-anchor-textquote"
   },
   "dependencies": {
-    "xpath-range": "0.0.2-dev02"
+    "xpath-range": "0.0.4"
   },
   "devDependencies": {
     "browser-resolve": "~1.2.1",
@@ -32,6 +32,11 @@
   "engines": {
     "node": ">=0.8 <0.12"
   },
+  "author": {
+    "name": "Kristof Csillag",
+    "email": "csillag@hypothes.is"
+  },
+  "license": "BSD-2-Clause",
   "scripts": {
     "start": "./tools/serve",
     "prepublish": "coffee -o lib src/",
