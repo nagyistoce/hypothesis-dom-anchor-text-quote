@@ -1,11 +1,11 @@
 {
-  "name": "dom-anchor-textquote",
+  "name": "dom-anchor-text-quote",
   "version": "0.0.0-dev2",
   "description": "A DOM Anchoring Framework plugin that implements TextQuoteSelector",
   "main": "lib/textquote.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hypothesis/dom-anchor-textquote"
+    "url": "https://github.com/hypothesis/dom-anchor-text-quote"
   },
   "dependencies": {
     "xpath-range": "0.0.4"
